@@ -142,11 +142,31 @@
 
     <!-- ===================== HERO ===================== -->
     <section class="hero" id="inicio">
-      <div class="deco" aria-hidden="true">
-        <svg class="deco-item deco-hero-1"><use href="#ing-tomate"/></svg>
-        <svg class="deco-item deco-hero-2"><use href="#ing-albahaca"/></svg>
-        <svg class="deco-item deco-hero-3"><use href="#ing-guindilla"/></svg>
-        <svg class="deco-item deco-hero-4"><use href="#ing-aceituna"/></svg>
+      <div class="bg-pizza-wrapper" aria-hidden="true">
+        <div id="bg-pizza">
+          <svg class="pizza-base" viewBox="0 0 100 100">
+             <circle cx="50" cy="50" r="48" fill="#e8dcc3" /> <!-- Masa -->
+             <circle cx="50" cy="50" r="44" fill="#c2452f" /> <!-- Tomate -->
+             <circle cx="50" cy="50" r="42" fill="#fff" opacity="0.8"/> <!-- Queso -->
+             <!-- Manchas tostadas del queso -->
+             <circle cx="30" cy="30" r="8" fill="#e8dcc3" opacity="0.6"/>
+             <circle cx="70" cy="40" r="12" fill="#e8dcc3" opacity="0.6"/>
+             <circle cx="45" cy="75" r="9" fill="#e8dcc3" opacity="0.6"/>
+          </svg>
+          <!-- Ingredientes que saltarán -->
+          <svg class="pizza-ing" data-dx="-1.2" data-dy="-1.8" data-dr="-45" style="top:20%; left:25%;"><use href="#ing-tomate"/></svg>
+          <svg class="pizza-ing" data-dx="1.5" data-dy="-1.4" data-dr="30" style="top:15%; right:30%;"><use href="#ing-albahaca"/></svg>
+          <svg class="pizza-ing" data-dx="-1.8" data-dy="0.5" data-dr="90" style="top:45%; left:15%;"><use href="#ing-champi"/></svg>
+          <svg class="pizza-ing" data-dx="1.6" data-dy="1.6" data-dr="-60" style="bottom:25%; right:20%;"><use href="#ing-aceituna"/></svg>
+          <svg class="pizza-ing" data-dx="-0.8" data-dy="1.9" data-dr="120" style="bottom:20%; left:35%;"><use href="#ing-ajo"/></svg>
+          <svg class="pizza-ing" data-dx="0.9" data-dy="1.7" data-dr="-90" style="bottom:15%; right:45%;"><use href="#ing-guindilla"/></svg>
+          <svg class="pizza-ing" data-dx="0" data-dy="-2.0" data-dr="45" style="top:10%; left:50%;"><use href="#ing-champi"/></svg>
+          <svg class="pizza-ing" data-dx="-1.4" data-dy="-0.2" data-dr="-15" style="top:35%; left:40%;"><use href="#ing-aceituna"/></svg>
+          <svg class="pizza-ing" data-dx="1.9" data-dy="0.2" data-dr="75" style="top:50%; right:15%;"><use href="#ing-tomate"/></svg>
+          <svg class="pizza-ing" data-dx="1.2" data-dy="-0.5" data-dr="-35" style="top:40%; right:40%;"><use href="#ing-albahaca"/></svg>
+          <svg class="pizza-ing" data-dx="-0.5" data-dy="-1.2" data-dr="15" style="top:60%; left:55%;"><use href="#ing-champi"/></svg>
+          <svg class="pizza-ing" data-dx="0.5" data-dy="1.2" data-dr="-115" style="bottom:35%; left:50%;"><use href="#ing-tomate"/></svg>
+        </div>
       </div>
       <div class="hero-inner">
         <p class="hero-eyebrow reveal">Pizzeria napoletana · Teatinos, Málaga</p>
@@ -195,11 +215,6 @@
 
     <!-- ===================== NOSOTROS ===================== -->
     <section class="about section" id="nosotros">
-      <div class="deco" aria-hidden="true">
-        <svg class="deco-item deco-about-1"><use href="#ing-ajo"/></svg>
-        <svg class="deco-item deco-about-2"><use href="#ing-tomate"/></svg>
-        <svg class="deco-item deco-about-3"><use href="#ing-champi"/></svg>
-      </div>
       <div class="container">
         <p class="kicker reveal">Nuestra esencia</p>
         <h2 class="section-title reveal" data-split>
@@ -296,14 +311,6 @@
 
     <!-- ===================== CARTA ===================== -->
     <section class="menu section" id="carta">
-      <div class="deco" aria-hidden="true">
-        <svg class="deco-item deco-menu-1"><use href="#ing-albahaca"/></svg>
-        <svg class="deco-item deco-menu-2"><use href="#ing-guindilla"/></svg>
-        <svg class="deco-item deco-menu-3"><use href="#ing-tomate"/></svg>
-        <svg class="deco-item deco-menu-4"><use href="#ing-champi"/></svg>
-        <svg class="deco-item deco-menu-5"><use href="#ing-ajo"/></svg>
-        <svg class="deco-item deco-menu-6"><use href="#ing-aceituna"/></svg>
-      </div>
       <div class="container">
         <p class="kicker reveal">Pizza napoletana</p>
         <h2 class="section-title reveal" data-split data-i18n="menu-title">La carta</h2>
@@ -481,10 +488,6 @@
 
     <!-- ===================== INSTAGRAM ===================== -->
     <section class="insta section" id="instagram">
-      <div class="deco" aria-hidden="true">
-        <svg class="deco-item deco-insta-1"><use href="#ing-guindilla"/></svg>
-        <svg class="deco-item deco-insta-2"><use href="#ing-albahaca"/></svg>
-      </div>
       <div class="container">
         <p class="kicker reveal">Del horno a tu feed</p>
         <h2 class="section-title reveal" data-split>Síguenos en <em>@damimipizzeria</em></h2>
@@ -510,10 +513,6 @@
 
     <!-- ===================== VISÍTANOS ===================== -->
     <section class="visit section" id="visitanos">
-      <div class="deco" aria-hidden="true">
-        <svg class="deco-item deco-visit-1"><use href="#ing-tomate"/></svg>
-        <svg class="deco-item deco-visit-2"><use href="#ing-aceituna"/></svg>
-      </div>
       <div class="container visit-grid">
         <div class="visit-info">
           <p class="kicker reveal">Visítanos</p>

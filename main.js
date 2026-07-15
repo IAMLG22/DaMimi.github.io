@@ -481,32 +481,50 @@
   }
 
   /* ----------------------------------------------------------
-     Parallax de decoraciones (mousemove)
+     Animación de Pizza Explosiva (Scroll)
      ---------------------------------------------------------- */
-  function initParallax() {
-    if (reduced || !fineHover) return;
-    var decos = $$(".deco-item");
-    if (!decos.length) return;
-    
-    var cx = window.innerWidth / 2;
-    var cy = window.innerHeight / 2;
+  function initPizzaExplosion() {
+    if (reduced) return;
+    var pizzaWrap = $("#bg-pizza");
+    if (!pizzaWrap) return;
+    var ings = $$(".pizza-ing", pizzaWrap);
     var ticking = false;
-    var tx = 0, ty = 0;
     
-    document.addEventListener("mousemove", function(e) {
-      tx = (e.clientX - cx) / cx; // -1 to 1
-      ty = (e.clientY - cy) / cy; // -1 to 1
+    function update() {
+      var scroll = window.scrollY;
+      // Máxima dispersión al scrollear 1.2 veces el alto de la ventana
+      var maxScroll = window.innerHeight * 1.2;
+      var progress = Math.min(scroll / maxScroll, 1);
+      
+      // Easing simple
+      var p = progress * (2 - progress); 
+      
+      // Radio de dispersión (depende del ancho de pantalla para que se salgan)
+      var maxDistance = window.innerWidth * 0.6; 
+      
+      ings.forEach(function(ing) {
+        var dx = parseFloat(ing.getAttribute("data-dx") || "0");
+        var dy = parseFloat(ing.getAttribute("data-dy") || "0");
+        var dr = parseFloat(ing.getAttribute("data-dr") || "0");
+        
+        var x = dx * maxDistance * p;
+        var y = dy * maxDistance * p;
+        var r = dr + (p * dr * 2); // Rotación acumulativa
+        
+        ing.style.transform = "translate3d(" + x + "px, " + y + "px, 0) rotate(" + r + "deg)";
+      });
+      
+      ticking = false;
+    }
+    
+    window.addEventListener("scroll", function() {
       if (!ticking) {
-        requestAnimationFrame(function() {
-          decos.forEach(function(el, i) {
-            var factor = (i % 3 + 1) * 15;
-            el.style.transform = "translate3d(" + (tx * -factor) + "px, " + (ty * -factor) + "px, 0)";
-          });
-          ticking = false;
-        });
+        requestAnimationFrame(update);
         ticking = true;
       }
     }, { passive: true });
+    
+    update(); // Init call
   }
 
   /* ----------------------------------------------------------
@@ -526,7 +544,7 @@
     safe(initMenuSpy, "initMenuSpy");
     safe(initButtonPop, "initButtonPop");
     safe(initFilters, "initFilters");
-    safe(initParallax, "initParallax");
+    safe(initPizzaExplosion, "initPizzaExplosion");
     document.documentElement.classList.add("is-ready");
   }
 
