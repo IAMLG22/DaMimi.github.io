@@ -151,48 +151,41 @@
     <section class="hero" id="inicio">
       <div class="bg-pizza-wrapper" aria-hidden="true">
         <div id="bg-pizza">
-          <svg class="pizza-base" viewBox="0 0 100 100">
-             <!-- La masa está siempre visible -->
-             <circle class="pizza-crust" cx="50" cy="50" r="48" fill="#e8dcc3" /> 
-             <!-- La salsa y el queso empezarán ocultos y crecerán -->
-             <circle id="pizza-sauce" cx="50" cy="50" r="44" fill="#c2452f" /> 
-             <g id="pizza-cheese">
-               <circle cx="50" cy="50" r="42" fill="#fff" opacity="0.8"/>
-               <circle cx="30" cy="30" r="8" fill="#e8dcc3" opacity="0.6"/>
-               <circle cx="70" cy="40" r="12" fill="#e8dcc3" opacity="0.6"/>
-               <circle cx="45" cy="75" r="9" fill="#e8dcc3" opacity="0.6"/>
-             </g>
-          </svg>
+          <!-- Masa realista (Cae en Fase 1) -->
+          <img src="assets/img/real_dough.png" class="pizza-base" style="border-radius: 50%; object-fit: cover;" alt="" />
           
-          <!-- Tomates iniciales (caen en Fase 1) -->
-          <div class="ing-wrapper ing-tomato-drop" style="top:50%; left:50%;"><svg class="pizza-ing" data-r="-45"><use href="#ing-tomate"/></svg></div>
-          <div class="ing-wrapper ing-tomato-drop" style="top:45%; left:35%;"><svg class="pizza-ing" data-r="30"><use href="#ing-tomate"/></svg></div>
-          <div class="ing-wrapper ing-tomato-drop" style="top:55%; left:65%;"><svg class="pizza-ing" data-r="90"><use href="#ing-tomate"/></svg></div>
-          <div class="ing-wrapper ing-tomato-drop" style="top:40%; left:55%;"><svg class="pizza-ing" data-r="15"><use href="#ing-tomate"/></svg></div>
-          <div class="ing-wrapper ing-tomato-drop" style="top:58%; left:42%;"><svg class="pizza-ing" data-r="-60"><use href="#ing-tomate"/></svg></div>
+          <!-- Salsa realista (Fase 2) -->
+          <img src="assets/img/real_sauce.png" id="pizza-sauce" class="pizza-base" style="border-radius: 50%; object-fit: cover; opacity: 0; transform: rotateX(65deg) rotateZ(-15deg) scale(0.9);" alt="" />
+          
+          <!-- Queso fundido base (Fase 3) -->
+          <img src="assets/img/real_burrata.png" id="pizza-cheese" class="pizza-base" style="border-radius: 50%; object-fit: cover; opacity: 0; transform: rotateX(65deg) rotateZ(-15deg) scale(0.85);" alt="" />
+          
+          <!-- Tomates cayendo (Fase 1.5) -->
+          <div class="ing-wrapper ing-tomato-drop" style="top:50%; left:50%;"><img src="assets/img/real_tomato.png" class="pizza-ing" style="border-radius: 50%; width:15%; height:15%;" data-r="-45"/></div>
+          <div class="ing-wrapper ing-tomato-drop" style="top:45%; left:35%;"><img src="assets/img/real_tomato.png" class="pizza-ing" style="border-radius: 50%; width:15%; height:15%;" data-r="30"/></div>
+          <div class="ing-wrapper ing-tomato-drop" style="top:55%; left:65%;"><img src="assets/img/real_tomato.png" class="pizza-ing" style="border-radius: 50%; width:15%; height:15%;" data-r="90"/></div>
+          <div class="ing-wrapper ing-tomato-drop" style="top:40%; left:55%;"><img src="assets/img/real_tomato.png" class="pizza-ing" style="border-radius: 50%; width:15%; height:15%;" data-r="15"/></div>
+          <div class="ing-wrapper ing-tomato-drop" style="top:58%; left:42%;"><img src="assets/img/real_tomato.png" class="pizza-ing" style="border-radius: 50%; width:15%; height:15%;" data-r="-60"/></div>
 
-          <!-- Trozos de queso (caen en Fase 2.5) -->
-          <div class="ing-wrapper ing-cheese-drop" style="top:48%; left:50%;"><svg class="pizza-ing" data-r="45"><use href="#ing-queso"/></svg></div>
-          <div class="ing-wrapper ing-cheese-drop" style="top:55%; left:55%;"><svg class="pizza-ing" data-r="-30"><use href="#ing-queso"/></svg></div>
-          <div class="ing-wrapper ing-cheese-drop" style="top:42%; left:45%;"><svg class="pizza-ing" data-r="80"><use href="#ing-queso"/></svg></div>
-          <div class="ing-wrapper ing-cheese-drop" style="top:50%; left:60%;"><svg class="pizza-ing" data-r="-15"><use href="#ing-queso"/></svg></div>
-          <div class="ing-wrapper ing-cheese-drop" style="top:55%; left:40%;"><svg class="pizza-ing" data-r="120"><use href="#ing-queso"/></svg></div>
+          <!-- Trozos de burrata (Fase 2.5) -->
+          <div class="ing-wrapper ing-cheese-drop" style="top:48%; left:50%;"><img src="assets/img/real_burrata.png" class="pizza-ing" style="border-radius: 50%; width:20%; height:20%;" data-r="45"/></div>
+          <div class="ing-wrapper ing-cheese-drop" style="top:55%; left:55%;"><img src="assets/img/real_burrata.png" class="pizza-ing" style="border-radius: 50%; width:20%; height:20%;" data-r="-30"/></div>
+          <div class="ing-wrapper ing-cheese-drop" style="top:42%; left:45%;"><img src="assets/img/real_burrata.png" class="pizza-ing" style="border-radius: 50%; width:20%; height:20%;" data-r="80"/></div>
+          <div class="ing-wrapper ing-cheese-drop" style="top:50%; left:60%;"><img src="assets/img/real_burrata.png" class="pizza-ing" style="border-radius: 50%; width:20%; height:20%;" data-r="-15"/></div>
+          <div class="ing-wrapper ing-cheese-drop" style="top:55%; left:40%;"><img src="assets/img/real_burrata.png" class="pizza-ing" style="border-radius: 50%; width:20%; height:20%;" data-r="120"/></div>
 
-          <!-- Resto de ingredientes (caen en Fase 4) -->
-          <div class="ing-wrapper ing-final-drop" style="top:40%; left:40%;"><svg class="pizza-ing" data-r="-60"><use href="#ing-albahaca"/></svg></div>
-          <div class="ing-wrapper ing-final-drop" style="top:42%; left:60%;"><svg class="pizza-ing" data-r="120"><use href="#ing-maiz"/></svg></div>
-          <div class="ing-wrapper ing-final-drop" style="top:60%; left:50%;"><svg class="pizza-ing" data-r="-90"><use href="#ing-champi"/></svg></div>
-          <div class="ing-wrapper ing-final-drop" style="top:55%; left:30%;"><svg class="pizza-ing" data-r="45"><use href="#ing-aceituna"/></svg></div>
-          <div class="ing-wrapper ing-final-drop" style="top:48%; left:20%;"><svg class="pizza-ing" data-r="-15"><use href="#ing-ajo"/></svg></div>
-          <div class="ing-wrapper ing-final-drop" style="top:52%; left:75%;"><svg class="pizza-ing" data-r="75"><use href="#ing-guindilla"/></svg></div>
-          <div class="ing-wrapper ing-final-drop" style="top:60%; left:65%;"><svg class="pizza-ing" data-r="-35"><use href="#ing-champi"/></svg></div>
-          <div class="ing-wrapper ing-final-drop" style="top:35%; left:50%;"><svg class="pizza-ing" data-r="15"><use href="#ing-maiz"/></svg></div>
-          <div class="ing-wrapper ing-final-drop" style="top:48%; left:80%;"><svg class="pizza-ing" data-r="-115"><use href="#ing-albahaca"/></svg></div>
-          <div class="ing-wrapper ing-final-drop" style="top:58%; left:35%;"><svg class="pizza-ing" data-r="60"><use href="#ing-champi"/></svg></div>
-          <div class="ing-wrapper ing-final-drop" style="top:45%; left:50%;"><svg class="pizza-ing" data-r="-80"><use href="#ing-aceituna"/></svg></div>
-
-          <!-- Dibujo final mágico de la pizza (Fase 5) -->
-          <img src="assets/img/pizza-illustration.png" class="pizza-final-drawing" alt="Pizza Napolitana Final" />
+          <!-- Albahaca final (Fase 4) -->
+          <div class="ing-wrapper ing-final-drop" style="top:40%; left:40%;"><img src="assets/img/real_basil.png" class="pizza-ing" style="border-radius: 50% 0 50% 0; width:12%; height:12%;" data-r="-60"/></div>
+          <div class="ing-wrapper ing-final-drop" style="top:42%; left:60%;"><img src="assets/img/real_basil.png" class="pizza-ing" style="border-radius: 50% 0 50% 0; width:12%; height:12%;" data-r="120"/></div>
+          <div class="ing-wrapper ing-final-drop" style="top:60%; left:50%;"><img src="assets/img/real_basil.png" class="pizza-ing" style="border-radius: 50% 0 50% 0; width:12%; height:12%;" data-r="-90"/></div>
+          <div class="ing-wrapper ing-final-drop" style="top:55%; left:30%;"><img src="assets/img/real_basil.png" class="pizza-ing" style="border-radius: 50% 0 50% 0; width:12%; height:12%;" data-r="45"/></div>
+          <div class="ing-wrapper ing-final-drop" style="top:48%; left:20%;"><img src="assets/img/real_basil.png" class="pizza-ing" style="border-radius: 50% 0 50% 0; width:12%; height:12%;" data-r="-15"/></div>
+          <div class="ing-wrapper ing-final-drop" style="top:52%; left:75%;"><img src="assets/img/real_basil.png" class="pizza-ing" style="border-radius: 50% 0 50% 0; width:12%; height:12%;" data-r="75"/></div>
+          <div class="ing-wrapper ing-final-drop" style="top:60%; left:65%;"><img src="assets/img/real_basil.png" class="pizza-ing" style="border-radius: 50% 0 50% 0; width:12%; height:12%;" data-r="-35"/></div>
+          <div class="ing-wrapper ing-final-drop" style="top:35%; left:50%;"><img src="assets/img/real_basil.png" class="pizza-ing" style="border-radius: 50% 0 50% 0; width:12%; height:12%;" data-r="15"/></div>
+          <div class="ing-wrapper ing-final-drop" style="top:48%; left:80%;"><img src="assets/img/real_basil.png" class="pizza-ing" style="border-radius: 50% 0 50% 0; width:12%; height:12%;" data-r="-115"/></div>
+          <div class="ing-wrapper ing-final-drop" style="top:58%; left:35%;"><img src="assets/img/real_basil.png" class="pizza-ing" style="border-radius: 50% 0 50% 0; width:12%; height:12%;" data-r="60"/></div>
+          <div class="ing-wrapper ing-final-drop" style="top:45%; left:50%;"><img src="assets/img/real_basil.png" class="pizza-ing" style="border-radius: 50% 0 50% 0; width:12%; height:12%;" data-r="-80"/></div>
         </div>
       </div>
       <div class="hero-inner">

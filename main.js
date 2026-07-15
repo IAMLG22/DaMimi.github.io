@@ -567,24 +567,7 @@
       opacity: [0, 1],
       duration: 1500,
       delay: anime.stagger(100)
-    }, '-=200')
-    
-    // Fase 5: Transición mágica final al dibujo de alta calidad
-    .add({
-      targets: [baseSvg, finals],
-      opacity: [1, 0], // Todo el SVG se desvanece
-      duration: 600,
-      easing: 'easeInQuad'
-    }, '+=800')
-    .add({
-      targets: finalDrawing,
-      opacity: [0, 1], // El dibujo espectacular aparece (dentro del contenedor al 0.25)
-      rotateX: [65, 65],
-      rotateZ: [-15, -15],
-      scale: [0.95, 1],
-      duration: 800,
-      easing: 'easeOutBack'
-    }, '-=600');
+    }, '-=200');
   }
 
   /* ----------------------------------------------------------
