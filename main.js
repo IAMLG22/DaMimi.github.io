@@ -481,50 +481,30 @@
   }
 
   /* ----------------------------------------------------------
-     Animación de Pizza Explosiva (Scroll)
+     Animación de Pizza 3D (Drop)
      ---------------------------------------------------------- */
   function initPizzaExplosion() {
     if (reduced) return;
     var pizzaWrap = $("#bg-pizza");
     if (!pizzaWrap) return;
     var ings = $$(".pizza-ing", pizzaWrap);
-    var ticking = false;
     
-    function update() {
-      var scroll = window.scrollY;
-      // Máxima dispersión al scrollear 1.2 veces el alto de la ventana
-      var maxScroll = window.innerHeight * 1.2;
-      var progress = Math.min(scroll / maxScroll, 1);
-      
-      // Easing simple
-      var p = progress * (2 - progress); 
-      
-      // Radio de dispersión (depende del ancho de pantalla para que se salgan)
-      var maxDistance = window.innerWidth * 0.6; 
-      
-      ings.forEach(function(ing) {
-        var dx = parseFloat(ing.getAttribute("data-dx") || "0");
-        var dy = parseFloat(ing.getAttribute("data-dy") || "0");
-        var dr = parseFloat(ing.getAttribute("data-dr") || "0");
-        
-        var x = dx * maxDistance * p;
-        var y = dy * maxDistance * p;
-        var r = dr + (p * dr * 2); // Rotación acumulativa
-        
-        ing.style.transform = "translate3d(" + x + "px, " + y + "px, 0) rotate(" + r + "deg)";
+    if (window.anime) {
+      anime({
+        targets: ings,
+        translateZ: [1000, 0],
+        opacity: [0, 1],
+        rotateZ: function() { return anime.random(-180, 180); },
+        duration: 2000,
+        delay: anime.stagger(150, {start: 800}), // Caen uno a uno después de 800ms
+        easing: "easeOutElastic(1, .6)" // Rebote ligero y natural al aterrizar
       });
-      
-      ticking = false;
+    } else {
+      ings.forEach(function(ing) {
+        ing.style.opacity = "1";
+        ing.style.transform = "translateZ(0)";
+      });
     }
-    
-    window.addEventListener("scroll", function() {
-      if (!ticking) {
-        requestAnimationFrame(update);
-        ticking = true;
-      }
-    }, { passive: true });
-    
-    update(); // Init call
   }
 
   /* ----------------------------------------------------------
