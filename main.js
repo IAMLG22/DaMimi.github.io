@@ -491,83 +491,23 @@
   }
 
   /* ----------------------------------------------------------
-     Animación de Pizza Secuencial (Caída Libre)
+     Animación de Hero (Imagen Única Elegante)
      ---------------------------------------------------------- */
-  function initPizzaExplosion() {
+  function initHeroAnimation() {
     if (reduced) return;
-    var pizzaWrap = $("#bg-pizza");
-    if (!pizzaWrap || !window.anime) return;
+    var pizzaImg = $("#hero-pizza-img");
+    if (!pizzaImg || !window.anime) return;
     
-    var tomatoes = $$(".ing-tomato-drop", pizzaWrap);
-    var cheeseDrops = $$(".ing-cheese-drop", pizzaWrap);
-    var finals = $$(".ing-final-drop", pizzaWrap);
-    var sauce = $("#pizza-sauce");
-    var cheeseMelt = $("#pizza-cheese");
-    var baseSvg = $(".pizza-base", pizzaWrap);
-    var finalDrawing = $(".pizza-final-drawing", pizzaWrap);
-    
-    // Crear una línea de tiempo (Timeline)
-    var tl = anime.timeline({
-      easing: 'easeOutElastic(1, .6)'
+    // Zoom suave y fade-in de la pizza
+    anime({
+      targets: pizzaImg,
+      opacity: [0, 1],
+      translateY: [20, 0],
+      scale: [0.95, 1],
+      duration: 2000,
+      easing: 'easeOutQuart',
+      delay: 200
     });
-    
-    // Fase 1: Caen los tomates desde el cielo (fuera de la pantalla)
-    // Ya NO forzamos opacity a 1 en pizzaWrap para mantenerlo como fondo de marca de agua (0.25)
-    tl.add({
-      targets: tomatoes,
-      translateY: [-1000, 0],
-      opacity: [0, 1],
-      duration: 1500,
-      delay: anime.stagger(150, {start: 500}) // Caen uno a uno
-    })
-    
-    // Fase 2: Los tomates hacen "chof" (desaparecen) y aparece la mancha de salsa
-    .add({
-      targets: tomatoes,
-      scale: [1, 0],
-      opacity: [1, 0],
-      duration: 300,
-      easing: 'easeInBack'
-    }, '+=200')
-    .add({
-      targets: sauce,
-      scale: [0, 1],
-      opacity: [0, 1],
-      duration: 800
-    }, '-=200')
-    
-    // Fase 2.5: Caen los trozos de mozzarella
-    .add({
-      targets: cheeseDrops,
-      translateY: [-1000, 0],
-      opacity: [0, 1],
-      duration: 1200,
-      delay: anime.stagger(100)
-    }, '-=400')
-    
-    // Fase 3: Los trozos de queso se desvanecen y aparece el queso fundido
-    .add({
-      targets: cheeseDrops,
-      scale: [1, 0],
-      opacity: [1, 0],
-      duration: 300,
-      easing: 'easeInBack'
-    }, '+=200')
-    .add({
-      targets: cheeseMelt,
-      scale: [0, 1],
-      opacity: [0, 1],
-      duration: 800
-    }, '-=200')
-    
-    // Fase 4: Caen el resto de ingredientes
-    .add({
-      targets: finals,
-      translateY: [-1200, 0],
-      opacity: [0, 1],
-      duration: 1500,
-      delay: anime.stagger(100)
-    }, '-=200');
   }
 
   /* ----------------------------------------------------------
@@ -587,7 +527,7 @@
     safe(initMenuSpy, "initMenuSpy");
     safe(initButtonPop, "initButtonPop");
     safe(initFilters, "initFilters");
-    safe(initPizzaExplosion, "initPizzaExplosion");
+    safe(initHeroAnimation, "initHeroAnimation");
     document.documentElement.classList.add("is-ready");
   }
 
