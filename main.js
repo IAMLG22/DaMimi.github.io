@@ -499,25 +499,26 @@
     if (!pizzaWrap || !window.anime) return;
     
     var tomatoes = $$(".ing-tomato-drop", pizzaWrap);
+    var cheeseDrops = $$(".ing-cheese-drop", pizzaWrap);
     var finals = $$(".ing-final-drop", pizzaWrap);
     var sauce = $("#pizza-sauce");
-    var cheese = $("#pizza-cheese");
+    var cheeseMelt = $("#pizza-cheese");
     var baseSvg = $(".pizza-base", pizzaWrap);
     var finalDrawing = $(".pizza-final-drawing", pizzaWrap);
     
-    // Crear una línea de tiempo (Timeline) para que pase una cosa después de la otra
+    // Crear una línea de tiempo (Timeline)
     var tl = anime.timeline({
       easing: 'easeOutElastic(1, .6)'
     });
     
     // Fase 1: Caen los tomates desde el cielo (fuera de la pantalla)
+    // Ya NO forzamos opacity a 1 en pizzaWrap para mantenerlo como fondo de marca de agua (0.25)
     tl.add({
       targets: tomatoes,
       translateY: [-1000, 0],
       opacity: [0, 1],
       duration: 1500,
-      delay: anime.stagger(150, {start: 500}), // Caen uno a uno
-      begin: function() { pizzaWrap.style.opacity = 1; } // Nos aseguramos de que el contenedor es visible
+      delay: anime.stagger(150, {start: 500}) // Caen uno a uno
     })
     
     // Fase 2: Los tomates hacen "chof" (desaparecen) y aparece la mancha de salsa
@@ -527,23 +528,39 @@
       opacity: [1, 0],
       duration: 300,
       easing: 'easeInBack'
-    }, '+=200') // Empieza 200ms después de que hayan caído
+    }, '+=200')
     .add({
       targets: sauce,
       scale: [0, 1],
       opacity: [0, 1],
       duration: 800
-    }, '-=200') // La salsa aparece un poco antes de que los tomates desaparezcan del todo
+    }, '-=200')
     
-    // Fase 3: Aparece el queso fundido sobre la salsa
+    // Fase 2.5: Caen los trozos de mozzarella
     .add({
-      targets: cheese,
+      targets: cheeseDrops,
+      translateY: [-1000, 0],
+      opacity: [0, 1],
+      duration: 1200,
+      delay: anime.stagger(100)
+    }, '-=400')
+    
+    // Fase 3: Los trozos de queso se desvanecen y aparece el queso fundido
+    .add({
+      targets: cheeseDrops,
+      scale: [1, 0],
+      opacity: [1, 0],
+      duration: 300,
+      easing: 'easeInBack'
+    }, '+=200')
+    .add({
+      targets: cheeseMelt,
       scale: [0, 1],
       opacity: [0, 1],
       duration: 800
-    }, '-=400')
+    }, '-=200')
     
-    // Fase 4: Caen el resto de ingredientes (maíz, albahaca, aceitunas...)
+    // Fase 4: Caen el resto de ingredientes
     .add({
       targets: finals,
       translateY: [-1200, 0],
@@ -558,16 +575,16 @@
       opacity: [1, 0], // Todo el SVG se desvanece
       duration: 600,
       easing: 'easeInQuad'
-    }, '+=800') // Esperamos un poquito a que aterricen
+    }, '+=800')
     .add({
       targets: finalDrawing,
-      opacity: [0, 1], // El dibujo espectacular aparece
+      opacity: [0, 1], // El dibujo espectacular aparece (dentro del contenedor al 0.25)
       rotateX: [65, 65],
       rotateZ: [-15, -15],
-      scale: [0.95, 1], // Pequeño efecto de "pop"
+      scale: [0.95, 1],
       duration: 800,
       easing: 'easeOutBack'
-    }, '-=600'); // Aparece cruzándose con el desvanecimiento del SVG
+    }, '-=600');
   }
 
   /* ----------------------------------------------------------
