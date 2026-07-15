@@ -481,30 +481,64 @@
   }
 
   /* ----------------------------------------------------------
-     Animación de Pizza 3D (Drop)
+     Animación de Pizza Secuencial (Caída Libre)
      ---------------------------------------------------------- */
   function initPizzaExplosion() {
     if (reduced) return;
     var pizzaWrap = $("#bg-pizza");
-    if (!pizzaWrap) return;
-    var ings = $$(".pizza-ing", pizzaWrap);
+    if (!pizzaWrap || !window.anime) return;
     
-    if (window.anime) {
-      anime({
-        targets: ings,
-        translateZ: [1000, 0],
-        opacity: [0, 1],
-        rotateZ: function() { return anime.random(-180, 180); },
-        duration: 2000,
-        delay: anime.stagger(150, {start: 800}), // Caen uno a uno después de 800ms
-        easing: "easeOutElastic(1, .6)" // Rebote ligero y natural al aterrizar
-      });
-    } else {
-      ings.forEach(function(ing) {
-        ing.style.opacity = "1";
-        ing.style.transform = "translateZ(0)";
-      });
-    }
+    var tomatoes = $$(".ing-tomato-drop", pizzaWrap);
+    var finals = $$(".ing-final-drop", pizzaWrap);
+    var sauce = $("#pizza-sauce");
+    var cheese = $("#pizza-cheese");
+    
+    // Crear una línea de tiempo (Timeline) para que pase una cosa después de la otra
+    var tl = anime.timeline({
+      easing: 'easeOutElastic(1, .6)'
+    });
+    
+    // Fase 1: Caen los tomates desde el cielo (fuera de la pantalla)
+    tl.add({
+      targets: tomatoes,
+      translateY: [-1000, 0],
+      opacity: [0, 1],
+      duration: 1500,
+      delay: anime.stagger(150, {start: 500}), // Caen uno a uno
+      begin: function() { pizzaWrap.style.opacity = 1; } // Nos aseguramos de que el contenedor es visible
+    })
+    
+    // Fase 2: Los tomates hacen "chof" (desaparecen) y aparece la mancha de salsa
+    .add({
+      targets: tomatoes,
+      scale: [1, 0],
+      opacity: [1, 0],
+      duration: 300,
+      easing: 'easeInBack'
+    }, '+=200') // Empieza 200ms después de que hayan caído
+    .add({
+      targets: sauce,
+      scale: [0, 1],
+      opacity: [0, 1],
+      duration: 800
+    }, '-=200') // La salsa aparece un poco antes de que los tomates desaparezcan del todo
+    
+    // Fase 3: Aparece el queso fundido sobre la salsa
+    .add({
+      targets: cheese,
+      scale: [0, 1],
+      opacity: [0, 1],
+      duration: 800
+    }, '-=400')
+    
+    // Fase 4: Caen el resto de ingredientes (maíz, albahaca, aceitunas...)
+    .add({
+      targets: finals,
+      translateY: [-1200, 0],
+      opacity: [0, 1],
+      duration: 1500,
+      delay: anime.stagger(100)
+    }, '-=200');
   }
 
   /* ----------------------------------------------------------
