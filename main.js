@@ -49,24 +49,34 @@
      Título del hero: entrada palabra a palabra
      ---------------------------------------------------------- */
   function initHeroTitle() {
-    var title = $(".hero-title[data-split]");
-    if (!title || !window.anime) {
-      if (title) title.classList.add("is-split-done");
+    var titles = $$(".hero-title[data-split]");
+    if (!titles.length || !window.anime) {
+      if (titles) titles.forEach(function(t) { t.classList.add("is-split-done"); });
       return;
     }
-    var words = splitWords(title);
-    title.classList.remove("reveal");
-    anime({
-      targets: words,
-      translateY: ["0.6em", 0],
-      opacity: [0, 1],
-      easing: "easeOutExpo",
-      duration: 1100,
-      delay: anime.stagger(55, { start: 150 }),
-      complete: function () { title.classList.add("is-split-done"); }
+    
+    var allWords = [];
+    titles.forEach(function(title) {
+      // Remove classes if they exist so it can be re-run safely when translating
+      title.classList.remove("is-split-done");
+      title.classList.remove("reveal");
+      var words = splitWords(title);
+      if (words && words.length) allWords = allWords.concat(words);
     });
-    // Red de seguridad: pase lo que pase, el título termina visible
-    setTimeout(function () { title.classList.add("is-split-done"); }, 3000);
+    
+    if (allWords.length > 0) {
+      anime({
+        targets: allWords,
+        translateY: ["0.6em", 0],
+        opacity: [0, 1],
+        easing: "easeOutExpo",
+        duration: 1100,
+        delay: anime.stagger(55, { start: 150 }),
+        complete: function () { titles.forEach(function(t) { t.classList.add("is-split-done"); }); }
+      });
+      // Red de seguridad: pase lo que pase, el título termina visible
+      setTimeout(function () { titles.forEach(function(t) { t.classList.add("is-split-done"); }); }, 3000);
+    }
   }
 
   /* ----------------------------------------------------------
@@ -492,6 +502,8 @@
     var finals = $$(".ing-final-drop", pizzaWrap);
     var sauce = $("#pizza-sauce");
     var cheese = $("#pizza-cheese");
+    var baseSvg = $(".pizza-base", pizzaWrap);
+    var finalDrawing = $(".pizza-final-drawing", pizzaWrap);
     
     // Crear una línea de tiempo (Timeline) para que pase una cosa después de la otra
     var tl = anime.timeline({
@@ -538,7 +550,24 @@
       opacity: [0, 1],
       duration: 1500,
       delay: anime.stagger(100)
-    }, '-=200');
+    }, '-=200')
+    
+    // Fase 5: Transición mágica final al dibujo de alta calidad
+    .add({
+      targets: [baseSvg, finals],
+      opacity: [1, 0], // Todo el SVG se desvanece
+      duration: 600,
+      easing: 'easeInQuad'
+    }, '+=800') // Esperamos un poquito a que aterricen
+    .add({
+      targets: finalDrawing,
+      opacity: [0, 1], // El dibujo espectacular aparece
+      rotateX: [65, 65],
+      rotateZ: [-15, -15],
+      scale: [0.95, 1], // Pequeño efecto de "pop"
+      duration: 800,
+      easing: 'easeOutBack'
+    }, '-=600'); // Aparece cruzándose con el desvanecimiento del SVG
   }
 
   /* ----------------------------------------------------------
