@@ -491,74 +491,6 @@
   }
 
   /* ----------------------------------------------------------
-     Hero: vídeo "scroll-scrub". El vídeo avanza conforme se hace
-     scroll por el hero (bloque sticky). El progreso 0→1 vive en la
-     variable CSS --p (usada también para desvanecer el texto).
-     ---------------------------------------------------------- */
-  function initHeroVideoScrub() {
-    var hero = $(".hero");
-    var video = $("#hero-video");
-    if (!hero || !video) return;
-
-    var setP = function (p) { hero.style.setProperty("--p", p.toFixed(4)); };
-
-    function progress() {
-      var scrollable = hero.offsetHeight - window.innerHeight;
-      if (scrollable <= 0) return 0;
-      var scrolled = Math.min(scrollable, Math.max(0, -hero.getBoundingClientRect().top));
-      return scrolled / scrollable;
-    }
-
-    var duration = 10, START = 3.6;   // arrancamos donde el fondo ya es NEGRO
-    var seekStart = function () { try { video.currentTime = START; } catch (e) {} };
-    video.addEventListener("loadedmetadata", function () {
-      if (isFinite(video.duration) && video.duration > 0) duration = video.duration;
-      seekStart();
-    });
-
-    // Movimiento reducido: sin scrub, un fotograma apetecible fijo
-    if (reduced) {
-      setP(0);
-      var freeze = function () { try { video.currentTime = Math.min(duration - 0.05, duration * 0.6); } catch (e) {} };
-      if (video.readyState >= 1) freeze(); else video.addEventListener("loadedmetadata", freeze);
-      return;
-    }
-
-    // "Prime" (sobre todo iOS/móvil): reproducir en silencio un instante y
-    // pausar, para que el navegador decodifique fotogramas al hacer seek.
-    var primed = false;
-    function prime() {
-      if (primed) return; primed = true;
-      var pr = video.play();
-      if (pr && pr.then) pr.then(function () { video.pause(); }).catch(function () {});
-    }
-
-    var target = 0, current = 0, running = false;
-    function tick() {
-      current += (target - current) * 0.14;          // suavizado (inercia)
-      if (Math.abs(target - current) < 0.0006) current = target;
-      // p 0→0.9 recorre t START→final; 0.9→1 mantiene la explosión final
-      var t = START + Math.min(1, current / 0.9) * (duration - START);
-      if (video.readyState >= 2 && isFinite(t) && Math.abs(video.currentTime - t) > 0.02) {
-        try { video.currentTime = Math.min(duration - 0.001, Math.max(START, t)); } catch (e) {}
-      }
-      setP(current);
-      if (current !== target) requestAnimationFrame(tick);
-      else running = false;
-    }
-    function onScroll() {
-      target = progress();
-      if (!running) { running = true; requestAnimationFrame(tick); }
-    }
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    var kick = function () { prime(); onScroll(); };
-    if (video.readyState >= 2) kick(); else video.addEventListener("loadeddata", kick);
-    setTimeout(kick, 1200); // red de seguridad
-  }
-
-  /* ----------------------------------------------------------
      Boot
      ---------------------------------------------------------- */
   function boot() {
@@ -575,7 +507,6 @@
     safe(initMenuSpy, "initMenuSpy");
     safe(initButtonPop, "initButtonPop");
     safe(initFilters, "initFilters");
-    safe(initHeroVideoScrub, "initHeroVideoScrub");
     document.documentElement.classList.add("is-ready");
   }
 
