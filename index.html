@@ -148,38 +148,51 @@
 
     <!-- ===================== HERO ===================== -->
     <section class="hero" id="inicio">
-      <div class="hero-inner">
-        <p class="hero-eyebrow reveal">Pizzeria napoletana · Teatinos, Málaga</p>
-        <h1 class="hero-title" data-split>
-          <span data-i18n="hero-title-1">La verdadera pizza napolitana,</span><br />
-          <em data-i18n="hero-title-2">a dos pasos de la uni.</em>
-        </h1>
-        <p class="hero-sub reveal" data-i18n="hero-sub">
-          Masa de 48 horas de fermentación, ingredientes italianos
-          y pasta fresca hecha en casa. Así de simple. Así de serio.
-        </p>
-        <div class="hero-actions reveal">
-          <a class="btn btn-primary" href="#carta" data-i18n="hero-btn-1">Ver la carta</a>
-          <a class="btn btn-ghost" href="tel:+34951705535" data-i18n="hero-btn-2">Reservar mesa</a>
-        </div>
-        <p class="hero-rating reveal">
-          <span class="stars" aria-hidden="true">★★★★★</span>
-          <strong>4,6</strong> en Google · más de 1.300 reseñas
-        </p>
-      </div>
+      <!-- Bloque fijado (sticky): el vídeo se "reproduce" al hacer scroll -->
+      <div class="hero-sticky">
+        <video class="hero-video" id="hero-video" muted playsinline preload="auto"
+               poster="assets/video/hero-pizza-poster.jpg" aria-hidden="true">
+          <source src="assets/video/hero-pizza.mp4" type="video/mp4" />
+        </video>
 
-      <div class="hero-triptych" data-triptych>
-        <figure class="tript-card" data-depth="0.4">
-          <img src="assets/img/masa-48h.jpg" alt="Masa de pizza napolitana con 48 horas de fermentación" loading="eager" fetchpriority="high" />
-        </figure>
-        <figure class="tript-card tript-main" data-depth="0.15">
-          <img src="assets/img/pizza-alessia.jpg" alt="Pizza Alessia con burrata, prosciutto crudo y rúcula" loading="eager" fetchpriority="high" />
-        </figure>
-        <figure class="tript-card" data-depth="0.55">
-          <img src="assets/img/pizzaiolo-horno.jpg" alt="Pizzaiolo de Da Mimì trabajando junto al horno" loading="eager" />
-        </figure>
+        <div class="hero-inner">
+          <p class="hero-eyebrow reveal">Pizzeria napoletana · Teatinos, Málaga</p>
+          <h1 class="hero-title" data-split>
+            <span data-i18n="hero-title-1">La verdadera pizza napolitana,</span><br />
+            <em data-i18n="hero-title-2">a dos pasos de la uni.</em>
+          </h1>
+          <p class="hero-sub reveal" data-i18n="hero-sub">
+            Masa de 48 horas de fermentación, ingredientes italianos
+            y pasta fresca hecha en casa. Así de simple. Así de serio.
+          </p>
+          <div class="hero-actions reveal">
+            <a class="btn btn-primary" href="#carta" data-i18n="hero-btn-1">Ver la carta</a>
+            <a class="btn btn-ghost" href="tel:+34951705535" data-i18n="hero-btn-2">Reservar mesa</a>
+          </div>
+          <p class="hero-rating reveal">
+            <span class="stars" aria-hidden="true">★★★★★</span>
+            <strong>4,6</strong> en Google · más de 1.300 reseñas
+          </p>
+        </div>
+
+        <div class="hero-scroll-hint" aria-hidden="true"><span></span></div>
       </div>
     </section>
+
+    <!-- Franja de proceso -->
+    <div class="hero-strip">
+      <div class="hero-triptych" data-triptych>
+        <figure class="tript-card" data-depth="0.4">
+          <img src="assets/img/masa-48h.jpg" alt="Masa de pizza napolitana con 48 horas de fermentación" loading="lazy" />
+        </figure>
+        <figure class="tript-card tript-main" data-depth="0.15">
+          <img src="assets/img/pizza-alessia.jpg" alt="Pizza Alessia con burrata, prosciutto crudo y rúcula" loading="lazy" />
+        </figure>
+        <figure class="tript-card" data-depth="0.55">
+          <img src="assets/img/pizzaiolo-horno.jpg" alt="Pizzaiolo de Da Mimì trabajando junto al horno" loading="lazy" />
+        </figure>
+      </div>
+    </div>
 
     <!-- ===================== TICKER ===================== -->
     <div class="ticker" aria-hidden="true">
