@@ -491,6 +491,22 @@
   }
 
   /* ----------------------------------------------------------
+     Vídeo de fondo del hero (bucle). El HTML ya lleva autoplay/loop/
+     muted; aquí solo reforzamos el play y respetamos "reduced motion".
+     ---------------------------------------------------------- */
+  function initHeroVideo() {
+    var v = $("#hero-video");
+    if (!v) return;
+    if (reduced) {
+      v.removeAttribute("autoplay");
+      try { v.pause(); } catch (e) {}
+      return;
+    }
+    var play = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+    if (v.readyState >= 2) play(); else v.addEventListener("canplay", play, { once: true });
+  }
+
+  /* ----------------------------------------------------------
      Boot
      ---------------------------------------------------------- */
   function boot() {
@@ -507,6 +523,7 @@
     safe(initMenuSpy, "initMenuSpy");
     safe(initButtonPop, "initButtonPop");
     safe(initFilters, "initFilters");
+    safe(initHeroVideo, "initHeroVideo");
     document.documentElement.classList.add("is-ready");
   }
 

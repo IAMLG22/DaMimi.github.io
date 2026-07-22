@@ -148,6 +148,12 @@
 
     <!-- ===================== HERO ===================== -->
     <section class="hero" id="inicio">
+      <!-- Vídeo de fondo en bucle: pizza girando + humo -->
+      <video class="hero-video" id="hero-video" autoplay loop muted playsinline preload="auto"
+             poster="assets/video/hero-loop-poster.jpg" aria-hidden="true">
+        <source src="assets/video/hero-loop.mp4" type="video/mp4" />
+      </video>
+
       <div class="hero-inner">
         <p class="hero-eyebrow reveal">Pizzeria napoletana · Teatinos, Málaga</p>
         <h1 class="hero-title" data-split>
@@ -168,18 +174,22 @@
         </p>
       </div>
 
+    </section>
+
+    <!-- Franja de proceso -->
+    <div class="hero-strip">
       <div class="hero-triptych" data-triptych>
         <figure class="tript-card" data-depth="0.4">
-          <img src="assets/img/masa-48h.jpg" alt="Masa de pizza napolitana con 48 horas de fermentación" loading="eager" fetchpriority="high" />
+          <img src="assets/img/masa-48h.jpg" alt="Masa de pizza napolitana con 48 horas de fermentación" loading="lazy" />
         </figure>
         <figure class="tript-card tript-main" data-depth="0.15">
-          <img src="assets/img/pizza-alessia.jpg" alt="Pizza Alessia con burrata, prosciutto crudo y rúcula" loading="eager" fetchpriority="high" />
+          <img src="assets/img/pizza-alessia.jpg" alt="Pizza Alessia con burrata, prosciutto crudo y rúcula" loading="lazy" />
         </figure>
         <figure class="tript-card" data-depth="0.55">
-          <img src="assets/img/pizzaiolo-horno.jpg" alt="Pizzaiolo de Da Mimì trabajando junto al horno" loading="eager" />
+          <img src="assets/img/pizzaiolo-horno.jpg" alt="Pizzaiolo de Da Mimì trabajando junto al horno" loading="lazy" />
         </figure>
       </div>
-    </section>
+    </div>
 
     <!-- ===================== TICKER ===================== -->
     <div class="ticker" aria-hidden="true">
